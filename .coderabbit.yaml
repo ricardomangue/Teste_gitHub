@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "pt-BR"
+reviews:
+  profile: "assertive"
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!target/**"
+    - "!images/**"
+  path_instructions:
+    - path: "src/main/java/**"
+      instructions: >
+        Rever codigo Java 17 com Spring Boot 3. Verificar: injeccao por construtor
+        em vez de @Autowired em campos, validacao de entrada (Bean Validation),
+        tratamento de erros, nomes claros, metodos curtos, ausencia de codigo
+        duplicado, uso correcto de JPA (evitar findAll para filtrar em memoria)
+        e logging com SLF4J em vez de System.out.
+        Assinalar riscos de seguranca: SQL injection, segredos no codigo,
+        hashes fracos (MD5/SHA-1), XSS, controlo de acesso em falta e dados
+        pessoais em logs. Nunca mostrar o valor de segredos no comentario.
+    - path: "src/main/resources/**"
+      instructions: >
+        Verificar configuracoes inseguras (consola H2 exposta, passwords em
+        ficheiro, show-sql em producao, ddl-auto) e uso de th:utext em templates.
+    - path: "src/test/**"
+      instructions: "Verificar cobertura de casos limite e de erro."
+chat:
+  auto_reply: true
